@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div style="margin-bottom:30px;" class="row">
+    <div class="container">
+       <h3 class="float-left">Люди</h3>
+       @using (Ajax.BeginForm("PeopleSearch","People", new AjaxOptions { UpdateTargetId = "PeopleResults" })) {
+           <div class=" row align-items-center justify-content-center mt-4 mb-4">
+               <form class="form-inline my-2 my-lg-0">
+                   <input class="form-control mr-sm-1" type="text" name="name" placeholder="Найти друга ...">
+                   <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Найти">
+               </form>
+           </div>
+        }
+
+         <div>@Html.Partial("_PeoplePartial")</div>
+   </div>
+</div>
+
+    
+

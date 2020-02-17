@@ -1,0 +1,22 @@
+﻿@{ 
+    ViewBag.Title = "FriendsList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2 class="text-center">Друзья</h2>
+<div class="container">
+
+    @using (Ajax.BeginForm("FriendSearch", new AjaxOptions { UpdateTargetId = "results" })) {
+        <div class=" row align-items-center justify-content-center mt-4 mb-4">
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-1" type="text" name="name" placeholder="Найти друга ...">
+                <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Найти">
+            </form>
+        </div>
+    }
+    
+    <div class="results">
+        @Html.Partial("FriendSearch")
+    </div>
+</div>
+
+

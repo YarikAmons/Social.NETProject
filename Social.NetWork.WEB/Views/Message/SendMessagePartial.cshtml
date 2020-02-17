@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Social.NetWork.BLL.DTO.MessageDTO>
+@using Social.NetWork.WEB.Helpers
+<div class="container row" id="sendingResults">
+    @foreach (var item in Model) {
+        if (item.Envelope != null) {
+            <div class="col-lg-2 col-md-2 col-sm-2  col-xl-1">
+                @Html.ImageFromArray(item.UserPhoto, "", "30px", "30px")
+            </div>
+            <div id="chatroom" class="col-lg-8 col-md-8 col-sm-8 col-xl-9">
+                @Html.DisplayFor(modelItem => item.Envelope)
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-1 col-xl-2">
+                <p style="font-size:15px;">@Html.DisplayFor(modelItem => item.Date)</p>
+            </div>
+        }
+    }
+</div>
+
+
+

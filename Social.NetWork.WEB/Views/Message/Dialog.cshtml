@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Social.NetWork.BLL.DTO.MessageDTO>
+@using Social.NetWork.WEB.Helpers
+@using Microsoft.AspNet.Identity
+@using System.Linq
+@{
+    ViewBag.Title = "Dialog";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="jchatBody" class="container results pb-4 overflow-auto" style="height:55vh;">
+    @Html.Partial("SendMessagePartial")
+</div>
+@using (Ajax.BeginForm("SendMessage", new AjaxOptions { UpdateTargetId = "sendingResults" })) {
+    <div class="container  mt-4 mb-3">
+        <form id="inputForm" class="form-inline my-2 my-lg-0 row">
+            <input type="hidden" name="UserID" value="@User.Identity.GetUserId()">
+            @foreach (var item in Model) {
+                if (item.FriendID != User.Identity.GetUserId()) {
+                    <input id="txtUserName" type="hidden" name="FriendID" value="@Html.DisplayFor(model=>item.FriendID)">
+                    break;
+                }
+            }
+            
+            <textarea id="message" class="form-control col-sm mr-2 " rows="3" type="text" name="Envelope" placeholder="Введите сообщение ..."></textarea>
+            <input id="sendmessage" class="btn btn-outline-success my-2 my-sm-1 col-sm" type="submit" value="Отправить">
+        </form>
+    </div>
+}

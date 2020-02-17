@@ -1,0 +1,56 @@
+﻿
+@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body class="h-100">
+    <div class="navbar navbar-expand-lg ">
+        <div class="container">
+            <div class="nav-item dropdown">
+                @Html.ActionLink("Social.NETWork", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <button type="button" class="navbar-toggler navbar" data-toggle="collapse" data-target=".navbar-collapse"
+                        aria-haspopup="true" aria-expanded="false">
+                    &#9776;
+                </button>
+            </div>
+            <div class="navbar  navbar-collapse collapse">
+                <ul class="nav navbar-nav mr-auto">
+                    @if (User.Identity.IsAuthenticated) {
+                        <li class="pr-2">@Html.ActionLink("Друзья", "FriendsList", "Friend", new { userId = User.Identity.GetUserId() }, null)</li>
+                        <li class="pr-2">@Html.ActionLink("Люди", "Index", "People", new { userId = User.Identity.GetUserId() }, null)</li>
+                        <li class="pr-2">@Html.ActionLink("Сообщения", "Index", "Message", new { userId = User.Identity.GetUserId() }, null)</li>
+                        <li class="pr-2">@Html.ActionLink("Акаунт", "Contact", "Home")</li>
+                    }
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <hr />
+
+    <div class=" container">
+        @RenderBody()
+
+    </div>
+
+    <footer class="d-flex align-items-center justify-content-center text-black-50 mt-auto">
+        <p class="Tex">&copy; @DateTime.Now.Year - Social.NetWork</p>
+    </footer>
+    @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/script")
+
+
+    @RenderSection("Scripts", false)
+</body>
+</html>
