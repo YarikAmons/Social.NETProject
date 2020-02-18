@@ -3,8 +3,9 @@ using Social.NetWork.BLL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Social.NetWork.WEB.Controllers {
@@ -15,12 +16,12 @@ namespace Social.NetWork.WEB.Controllers {
             userService = _userService;
             messageService = _messageService;
         }
-
         public async Task<ActionResult> Index(string UserID) {
             List<MessageDTO> model = await messageService.GetDialogs(UserID);
             return View("Index",model);
         }
         public async Task<ActionResult> ToWriteAMessage(string UserID, string FriendID) {
+            
             MessageDTO model = await messageService.CreateDialog(UserID, FriendID);
             List<MessageDTO> dialog = await messageService.GetMessagesWithThisFriend(UserID, FriendID);
             return View("Dialog",dialog);
@@ -39,9 +40,6 @@ namespace Social.NetWork.WEB.Controllers {
                 return null;
             }
             return PartialView("SendMessagePartial",dialog);
-
-            
         }
-        // Response.AddHeader("Refresh", "10");d
     }
 }

@@ -16,18 +16,15 @@ namespace Social.NetWork.DAL.Repositories {
         public ApplicationRoleManager RoleManager { get; }
         public IClientManager ClientManager { get; }
         public IFriendManager FriendManager { get; }
-        public IUserFriend UserFriendManager { get; }
         public IMessageManager MessageManager { get; }
         public UnitOfWork(ApplicationContext context,
             ApplicationUserManager _userManager,
             ApplicationRoleManager _roleManager,
             IClientManager _clientManager,
             IFriendManager friendManager,
-            IMessageManager messageManager,
-            IUserFriend _userFriend) 
+            IMessageManager messageManager) 
             {
             MessageManager = messageManager;
-            UserFriendManager = _userFriend;
             _context = context;
             UserManager = _userManager;
             RoleManager = _roleManager;

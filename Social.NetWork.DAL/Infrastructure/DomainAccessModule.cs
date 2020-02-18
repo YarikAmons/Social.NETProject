@@ -29,7 +29,6 @@ namespace Social.NetWork.DAL.Infrastructure {
             builder.RegisterType<ClientManager>().As<IClientManager>().InstancePerRequest();
             builder.RegisterType<FriendManager>().As<IFriendManager>().InstancePerRequest();
             builder.RegisterType<MessageManager>().As<IMessageManager>().InstancePerRequest();
-            builder.RegisterType<UserFriendManager>().As<IUserFriend>().InstancePerRequest();
         }
     }
 }

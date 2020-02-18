@@ -25,7 +25,6 @@ namespace Social.NetWork.BLL.Infrastructures {
             CreateMap<UserDTO, Friend>()
                 .ForMember(dest=>dest.Id,opt=>opt.Ignore())
                 .ForMember(dest=>dest.IdFriend,opt=>opt.MapFrom(src=>src.Id));
-            CreateMap<UserFriendDTO, UserFriend>();
             CreateMap<Message, MessageDTO>()
                 .ForMember(dest=>dest.UserPhoto,opt=>opt.MapFrom(src=>src.UserPhoto))
                 .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => src.FullName));

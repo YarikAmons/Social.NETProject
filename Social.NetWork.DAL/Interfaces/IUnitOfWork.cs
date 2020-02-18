@@ -9,7 +9,6 @@ namespace Social.NetWork.DAL.Interfaces {
         IClientManager ClientManager { get; }
         IMessageManager MessageManager { get; }
         IFriendManager FriendManager { get; }
-        IUserFriend UserFriendManager { get; }
         Task SaveAsync();
     }
 }

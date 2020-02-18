@@ -4,6 +4,7 @@ using Social.NetWork.DAL.Interfaces;
 
 namespace Social.NetWork.DAL.Repositories {
     public class MessageManager:Repository<Message>,IMessageManager {
-        public MessageManager(ApplicationContext context) : base(context) { }
+        public MessageManager(ApplicationContext context) : base(context) {}
+        
     }
 }

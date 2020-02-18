@@ -6,6 +6,10 @@ using Social.NetWork.DAL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Social.NetWork.BLL.Services {
@@ -21,8 +25,25 @@ namespace Social.NetWork.BLL.Services {
             friendService = _friendService;
             Mapper = mapper;
         }
+        
+        static void SendMessageFromSocket(int port,string envelope) {
+            
+            byte[] bytes = new byte[1024];
+            IPHostEntry ipHost = Dns.GetHostEntry("localhost");
+            IPAddress ipAddr = ipHost.AddressList[0];
+            IPEndPoint ipEndPoint = new IPEndPoint(ipAddr, port);
+            Socket sender = new Socket(ipAddr.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+            sender.Connect(ipEndPoint);
+            string message=envelope;
+            byte[] msg = Encoding.UTF8.GetBytes(message);
+            int bytesSent = sender.Send(msg);
+            int bytesRec = sender.Receive(bytes);
+            sender.Shutdown(SocketShutdown.Both);
+            sender.Close();
+        }
+
         public async Task<List<MessageDTO>> GetMessagesWithThisFriend(string CurrentUserID, string FriendID) {
-            ApplicationUser userProfile = await Database.UserManager.FindByIdAsync(CurrentUserID);
+           ApplicationUser userProfile = await Database.UserManager.FindByIdAsync(CurrentUserID);
             if (userProfile == null)
                 return null;
             List<Message> messWithThisFriend = new List<Message>();
@@ -102,6 +123,7 @@ namespace Social.NetWork.BLL.Services {
                 if (Envelope.Length!=0) {
                     Database.MessageManager.Create(message);
                     await Database.SaveAsync();
+                   
                 } else {
                     throw new Exception();
                 }
