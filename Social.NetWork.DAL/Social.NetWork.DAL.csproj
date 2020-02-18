@@ -113,37 +113,9 @@
     <Compile Include="Interfaces\IMessageManager.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
-    <Compile Include="Migrations\202002140941419_Main.cs" />
-    <Compile Include="Migrations\202002140941419_Main.designer.cs">
-      <DependentUpon>202002140941419_Main.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202002141125055_First.cs" />
-    <Compile Include="Migrations\202002141125055_First.designer.cs">
-      <DependentUpon>202002141125055_First.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202002160849327_MessageTable.cs" />
-    <Compile Include="Migrations\202002160849327_MessageTable.designer.cs">
-      <DependentUpon>202002160849327_MessageTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202002160951509_DateNull.cs" />
-    <Compile Include="Migrations\202002160951509_DateNull.designer.cs">
-      <DependentUpon>202002160951509_DateNull.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202002161116235_ChangeMessage.cs" />
-    <Compile Include="Migrations\202002161116235_ChangeMessage.designer.cs">
-      <DependentUpon>202002161116235_ChangeMessage.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202002161433196_MessageTimeToString.cs" />
-    <Compile Include="Migrations\202002161433196_MessageTimeToString.designer.cs">
-      <DependentUpon>202002161433196_MessageTimeToString.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202002161714150_MessageRequired.cs" />
-    <Compile Include="Migrations\202002161714150_MessageRequired.designer.cs">
-      <DependentUpon>202002161714150_MessageRequired.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202002161717237_MessageRequiredDelete.cs" />
-    <Compile Include="Migrations\202002161717237_MessageRequiredDelete.designer.cs">
-      <DependentUpon>202002161717237_MessageRequiredDelete.cs</DependentUpon>
+    <Compile Include="Migrations\202002181152176_Changes.cs" />
+    <Compile Include="Migrations\202002181152176_Changes.designer.cs">
+      <DependentUpon>202002181152176_Changes.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -158,29 +130,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202002140941419_Main.resx">
-      <DependentUpon>202002140941419_Main.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202002141125055_First.resx">
-      <DependentUpon>202002141125055_First.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202002160849327_MessageTable.resx">
-      <DependentUpon>202002160849327_MessageTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202002160951509_DateNull.resx">
-      <DependentUpon>202002160951509_DateNull.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202002161116235_ChangeMessage.resx">
-      <DependentUpon>202002161116235_ChangeMessage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202002161433196_MessageTimeToString.resx">
-      <DependentUpon>202002161433196_MessageTimeToString.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202002161714150_MessageRequired.resx">
-      <DependentUpon>202002161714150_MessageRequired.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202002161717237_MessageRequiredDelete.resx">
-      <DependentUpon>202002161717237_MessageRequiredDelete.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202002181152176_Changes.resx">
+      <DependentUpon>202002181152176_Changes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

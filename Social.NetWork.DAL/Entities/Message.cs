@@ -10,7 +10,6 @@ namespace Social.NetWork.DAL.Entities {
         public int Id { get; set; }
         public string FriendID { get; set; }
         public string UserID { get; set; }
-        
         public string Envelope { get; set; }
         public string Date { get; set; }
         public string FullName { get; set; }

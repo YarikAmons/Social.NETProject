@@ -26,22 +26,7 @@ namespace Social.NetWork.BLL.Services {
             Mapper = mapper;
         }
         
-        static void SendMessageFromSocket(int port,string envelope) {
-            
-            byte[] bytes = new byte[1024];
-            IPHostEntry ipHost = Dns.GetHostEntry("localhost");
-            IPAddress ipAddr = ipHost.AddressList[0];
-            IPEndPoint ipEndPoint = new IPEndPoint(ipAddr, port);
-            Socket sender = new Socket(ipAddr.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-            sender.Connect(ipEndPoint);
-            string message=envelope;
-            byte[] msg = Encoding.UTF8.GetBytes(message);
-            int bytesSent = sender.Send(msg);
-            int bytesRec = sender.Receive(bytes);
-            sender.Shutdown(SocketShutdown.Both);
-            sender.Close();
-        }
-
+       
         public async Task<List<MessageDTO>> GetMessagesWithThisFriend(string CurrentUserID, string FriendID) {
            ApplicationUser userProfile = await Database.UserManager.FindByIdAsync(CurrentUserID);
             if (userProfile == null)
@@ -95,8 +80,6 @@ namespace Social.NetWork.BLL.Services {
                 }
                 Message letters = new Message();
                 letters.UserID = userProfile.Id;
-                letters.FullName = friendProfile.UserName + " " + friendProfile.Surname;
-                letters.UserPhoto = friendProfile.UserPhoto;
                 letters.FriendID = friendProfile.Id;
                 letters.Date = DateTime.Now.ToString("HH:mm:ss");
                 try {
@@ -112,8 +95,6 @@ namespace Social.NetWork.BLL.Services {
             UserProfile userProfile = await Database.ClientManager.GetById(FriendID);
             Message message = new Message();
             if (Envelope.Length!= 0) {
-                message.FullName = userProfile.UserName + " " + userProfile.Surname;
-                message.UserPhoto = userProfile.UserPhoto;
                 message.UserID = UserID;
                 message.FriendID = FriendID;
                 message.Envelope = Envelope;

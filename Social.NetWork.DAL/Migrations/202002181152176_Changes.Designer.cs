@@ -7,13 +7,13 @@ namespace Social.NetWork.DAL.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.0")]
-    public sealed partial class MessageRequiredDelete : IMigrationMetadata
+    public sealed partial class Changes : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(MessageRequiredDelete));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Changes));
         
         string IMigrationMetadata.Id
         {
-            get { return "202002161717237_MessageRequiredDelete"; }
+            get { return "202002181152176_Changes"; }
         }
         
         string IMigrationMetadata.Source
