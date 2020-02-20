@@ -6,31 +6,22 @@ using Social.NetWork.DAL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Social.NetWork.BLL.Services {
     public class MessageService:IMessageService {
         private readonly IUnitOfWork Database;
-        private readonly IUserService userService;
-        private readonly IFriendService friendService;
         private readonly IMapper Mapper;
-        public MessageService(IUnitOfWork unitOfWork, IMapper mapper,
-            IUserService _userService,IFriendService _friendService) {
+        public MessageService(IUnitOfWork unitOfWork, IMapper mapper) {
             Database = unitOfWork;
-            userService = _userService;
-            friendService = _friendService;
             Mapper = mapper;
         }
         
        
         public async Task<List<MessageDTO>> GetMessagesWithThisFriend(string CurrentUserID, string FriendID) {
-           ApplicationUser userProfile = await Database.UserManager.FindByIdAsync(CurrentUserID);
-            if (userProfile == null)
-                return null;
+           //ApplicationUser userProfile = await Database.UserManager.FindByIdAsync(CurrentUserID);
+           // if (userProfile == null)
+           //     return null;
             List<Message> messWithThisFriend = new List<Message>();
             messWithThisFriend = Database.MessageManager.GetAll().ToList();
             List<MessageDTO> result = new List<MessageDTO>();
@@ -50,13 +41,21 @@ namespace Social.NetWork.BLL.Services {
             result = Mapper.Map<Message,MessageDTO>(single);
             return result;
         }
+
+        public MessageDTO GetLastMessage(string CurrentUserID, string FriendID) {
+            MessageDTO result = new MessageDTO();
+            List<Message> elem = Database.MessageManager.GetAll().Where(p => p.UserID == CurrentUserID && p.FriendID == FriendID).ToList();
+            Message single = elem.Last();
+            result = Mapper.Map<Message, MessageDTO>(single);
+            return result;
+        }
         public async Task<List<MessageDTO>> GetDialogs(string CurrentUserID) {
             ApplicationUser userProfile = await Database.UserManager.FindByIdAsync(CurrentUserID);
             if(userProfile==null)
                 return null;
             else {
                 List<Message> messCurrentUser = new List<Message>();
-                messCurrentUser = Database.MessageManager.GetAll().Where(r=>r.UserID==CurrentUserID).ToList();
+                messCurrentUser = Database.MessageManager.GetAll().Where(r=>r.UserID==CurrentUserID||r.FriendID==CurrentUserID).ToList();
                 List<MessageDTO> results = new List<MessageDTO>();
                 foreach(var el in messCurrentUser) {
                     if (!results.Contains(Mapper.Map<Message, MessageDTO>(el))) {
@@ -81,6 +80,8 @@ namespace Social.NetWork.BLL.Services {
                 Message letters = new Message();
                 letters.UserID = userProfile.Id;
                 letters.FriendID = friendProfile.Id;
+                letters.FullName = friendProfile.UserName+" "+ friendProfile.Surname;
+                letters.UserPhoto = friendProfile.UserPhoto;
                 letters.Date = DateTime.Now.ToString("HH:mm:ss");
                 try {
                     Database.MessageManager.Create(letters);
@@ -98,6 +99,8 @@ namespace Social.NetWork.BLL.Services {
                 message.UserID = UserID;
                 message.FriendID = FriendID;
                 message.Envelope = Envelope;
+                message.FullName = userProfile.UserName + " " + userProfile.Surname;
+                message.UserPhoto = userProfile.UserPhoto;
                 message.Date = DateTime.Now.ToString("HH:mm:ss");
             }
             try {

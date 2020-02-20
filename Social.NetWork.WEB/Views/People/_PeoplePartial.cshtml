@@ -5,35 +5,37 @@
 <div class="container" id="PeopleResults">
     @foreach (var item in Model) {
           <hr />
-            <div class="mt-4 col-sm-12">
-                <div class="col-sm-12 row">
-                    <div class="col">
-                        <div style="margin-top:30;" class="col pr-1">
-                            @Html.ImageFromArray(item.UserPhoto, "", "20%", "100%", null, "Photo")
-                        </div>
-                        <div class="col">
-                            <p>@Html.DisplayFor(modelItem => item.FullName)</p>
-                            <p>@Html.DisplayFor(modelItem => item.Email)</p>
-                            <p>@Html.DisplayFor(modelItem => item.BirthDate)</p>
-                            <p>@Html.DisplayFor(modelItem => item.ContactEmail)</p>
-                            <p>@Html.DisplayFor(modelItem => item.AboutMe)</p>
-                            <p>@Html.DisplayFor(modelItem => item.ContactPhone)</p>
-                        </div>
-                    </div>
-                    <div class="mt-5">
-                        <div class="col">
-                            @Html.ActionLink("Добавить в друзья", "AddToFriends", "People",
-                           new { userId = User.Identity.GetUserId(), Name = item.UserName },
-                           new { @class = "btn btn-outline-primary col" })                      
-                        </div>
-                        <div class="col mt-2">
-                            @Html.ActionLink("Написать", "ToWriteAMessage", "Message",
-                           new {UserID = User.Identity.GetUserId(), FriendID = item.Id},
-                           new { @class = "btn btn-outline-primary col" })
-                        </div>
-                    </div>
-                </div>
-            </div>
+          <div class="mt-4 col-sm-12">
+              @*<a href=@Html.Action("")>  asdasdasdasdasdasdadsasdas*@
+              <div class="col-sm-12 row">
+                  <div class="col">
+                      <div style="margin-top:30;" class="col pr-1">
+                          @Html.ImageFromArray(item.UserPhoto, "", "20%", "100%", null, "Photo")
+                      </div>
+                      <div class="col">
+                          <p>@Html.DisplayFor(modelItem => item.FullName)</p>
+                          <p>@Html.DisplayFor(modelItem => item.Email)</p>
+                          <p>@Html.DisplayFor(modelItem => item.BirthDate)</p>
+                          <p>@Html.DisplayFor(modelItem => item.ContactEmail)</p>
+                          <p>@Html.DisplayFor(modelItem => item.AboutMe)</p>
+                          <p>@Html.DisplayFor(modelItem => item.ContactPhone)</p>
+                      </div>
+                  </div>
+                  <div class="mt-5">
+                      <div class="col">
+                          @Html.ActionLink("Добавить в друзья", "AddToFriends", "People",
+                         new { userId = User.Identity.GetUserId(), Name = item.UserName },
+                         new { @class = "btn btn-outline-primary col" })
+                      </div>
+                      <div class="col mt-2">
+                          @Html.ActionLink("Написать", "ToWriteAMessage", "Message",
+                         new { UserID = User.Identity.GetUserId(), FriendID = item.Id },
+                         new { @class = "btn btn-outline-primary col" })
+                      </div>
+                  </div>
+              </div>
+              @*</a>*@
+          </div>
         }
  </div>
 

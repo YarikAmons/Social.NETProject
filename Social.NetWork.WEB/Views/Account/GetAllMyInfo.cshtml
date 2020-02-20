@@ -1,0 +1,51 @@
+﻿@model Social.NetWork.BLL.DTO.UserDTO
+@using Social.NetWork.WEB.Helpers
+@{
+    ViewBag.Title = "GetAllMyInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3 class="text-center">Моя странница</h3>
+
+<div class="container row">
+    <div class="col-4" >
+        <div >
+            @Html.ImageFromArray(Model.UserPhoto,"","100%","100%","","")
+        </div>
+        <div class="text-center mt-4">
+            <h5>@Html.DisplayFor(modelItem => Model.FullName)</h5>
+        </div>
+    </div>
+    <div class="col-8 row pl-5 mt-5">
+        <div>
+            <div class="row">
+                <p class="mr-2 text-primary"><strong>Email:</strong> </p>
+                @Html.DisplayFor(modelItem => Model.Email)
+            </div>
+            <div class="row">
+                <p class="mr-2 text-primary"><strong>Мобильный:</strong></p>
+                @if (Model.ContactPhone == null) {
+                    <p>Не указано...</p>
+                } else {
+                    @Html.DisplayFor(modelItem => Model.ContactPhone)
+                }
+            </div>
+            <div class="row">
+                <p class="mr-2 text-primary"><strong>День рожденья:</strong></p>
+                @if (Model.BirthDate == null) {
+                    <p>Не указано...</p>
+                } else {
+                    @Html.DisplayFor(modelItem => Model.BirthDate)
+                }
+            </div>
+                
+        </div>
+        <div class="ml-5 pl-3 overflow-hidden h-100 w-50" style="word-break:break-word; width:50px;height:60px;">
+            <p class="mr-2 text-primary"><strong>О себе:</strong></p>
+            <p class="multicolumn">
+                @Html.DisplayFor(modelItem => Model.AboutMe)
+            </p>
+            
+        </div>
+    </div>
+</div>

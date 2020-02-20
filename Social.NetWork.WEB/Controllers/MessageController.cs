@@ -9,30 +9,33 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace Social.NetWork.WEB.Controllers {
-    public class MessageController :Controller {
+    public class MessageController : Controller {
         private readonly IUserService userService;
         private readonly IMessageService messageService;
-        public MessageController(IMessageService _messageService,IUserService _userService) {
+        public MessageController(IMessageService _messageService, IUserService _userService) {
             userService = _userService;
             messageService = _messageService;
         }
         public async Task<ActionResult> Index(string UserID) {
             List<MessageDTO> model = await messageService.GetDialogs(UserID);
-            return View("Index",model);
+            model.Reverse();
+            
+            return View("Index", model);
         }
         public async Task<ActionResult> ToWriteAMessage(string UserID, string FriendID) {
-            
             MessageDTO model = await messageService.CreateDialog(UserID, FriendID);
             List<MessageDTO> dialog = await messageService.GetMessagesWithThisFriend(UserID, FriendID);
-            return View("Dialog",dialog);
+            return View("Dialog", dialog);
         }
+       
+        
+        
         public async Task<ActionResult> SendMessage(string UserID,string FriendID,string Envelope) {
-            
-            Response.Write("<script type='text/javascript'> setTimeout('location.reload(true);',5000);</script>");
-            List<MessageDTO> dialog =new List<MessageDTO>();
+            List<MessageDTO> dialog;
             try {
                 await messageService.sendMessage(UserID, FriendID, Envelope);
-                dialog = await messageService.GetMessagesWithThisFriend(UserID, FriendID);
+                dialog = await messageService.GetMessagesWithThisFriend(UserID, FriendID); 
+                //System.Threading.Thread.Sleep(2000);
                 if (dialog.Last().Envelope == null || dialog.Last().Envelope.Length == 0) {
                     throw new Exception();
                 }

@@ -488,6 +488,7 @@
     <Content Include="Views\Message\Index.cshtml" />
     <Content Include="Views\Message\Dialog.cshtml" />
     <Content Include="Views\Message\SendMessagePartial.cshtml" />
+    <Content Include="Views\Account\GetAllMyInfo.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

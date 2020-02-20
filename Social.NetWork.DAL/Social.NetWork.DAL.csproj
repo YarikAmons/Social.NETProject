@@ -101,6 +101,7 @@
     <Compile Include="EF\ApplicationContext.cs" />
     <Compile Include="Entities\ApplicationRole.cs" />
     <Compile Include="Entities\ApplicationUser.cs" />
+    <Compile Include="Entities\Dialog.cs" />
     <Compile Include="Entities\Friend.cs" />
     <Compile Include="Entities\Message.cs" />
     <Compile Include="Entities\UserProfile.cs" />
@@ -109,13 +110,14 @@
     <Compile Include="Identity\EmailService.cs" />
     <Compile Include="Infrastructure\DomainAccessModule.cs" />
     <Compile Include="Interfaces\IClientManager.cs" />
+    <Compile Include="Interfaces\IDialogManager.cs" />
     <Compile Include="Interfaces\IFriendManager.cs" />
     <Compile Include="Interfaces\IMessageManager.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
-    <Compile Include="Migrations\202002181152176_Changes.cs" />
-    <Compile Include="Migrations\202002181152176_Changes.designer.cs">
-      <DependentUpon>202002181152176_Changes.cs</DependentUpon>
+    <Compile Include="Migrations\202002181209337_Main.cs" />
+    <Compile Include="Migrations\202002181209337_Main.designer.cs">
+      <DependentUpon>202002181209337_Main.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -130,8 +132,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202002181152176_Changes.resx">
-      <DependentUpon>202002181152176_Changes.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202002181209337_Main.resx">
+      <DependentUpon>202002181209337_Main.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

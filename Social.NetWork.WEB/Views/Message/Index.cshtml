@@ -1,60 +1,42 @@
 ﻿@model IEnumerable<Social.NetWork.BLL.DTO.MessageDTO>
 @using Social.NetWork.WEB.Helpers
+@using Microsoft.AspNet.Identity
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Диалоги</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.UserPhoto)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FullName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FriendID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Envelope)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Date)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.ImageFromArray(item.UserPhoto,"","70px","70px","")
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.FullName)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.FriendID)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.UserID)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Envelope)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Date)
-    </td>
-   
-</tr>
-}
+
+    @foreach (var item in Model) {
+
+    <tr  class="">
+        <td class="w-25">
+            <div class="ml-3 col-2">
+                @Html.ImageFromArray(item.UserPhoto, "", "70px", "70px", "")
+            </div>
+            <div>
+                @Html.ActionLink(item.FullName,"ToWriteAMessage",new { UserID=User.Identity.GetUserId(),FriendID=item.FriendID})
+                
+            </div>
+            
+        </td>
+
+        <td class="col-8">
+            <div class="pt-3">
+                @Html.DisplayFor(modelItem => item.Envelope)
+            </div>
+        </td>
+        <td>
+            <div class=" pt-3 col">
+                @Html.DisplayFor(modelItem => item.Date)
+            </div>
+            
+        </td>
+    </tr>
+    }
 
 </table>

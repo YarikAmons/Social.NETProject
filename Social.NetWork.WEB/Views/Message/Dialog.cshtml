@@ -6,26 +6,52 @@
     ViewBag.Title = "Dialog";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<div id="jchatBody" class="container results pb-4 overflow-auto " style="max-height:55vh;">
-    @Html.Partial("SendMessagePartial")
-</div>
-@using (Ajax.BeginForm("SendMessage", new AjaxOptions { UpdateTargetId = "sendingResults" })) {
-<div class="container  mt-4 mb-3">
-    @*<script>
-onload = function () {setTimeout ('location.reload (true)', 12345)}
-    </script>*@
-    <form id="inputForm" class="form-inline my-2 my-lg-0 row">
-        <input type="hidden" name="UserID" value="@User.Identity.GetUserId()">
-        @foreach (var item in Model) {
-            if (item.FriendID != User.Identity.GetUserId()) {
-                <input id="txtUserName" type="hidden" name="FriendID" value="@Html.DisplayFor(model=>item.FriendID)">
-                break;
+    <script type="text/javascript">
+        function OnSuccess(data) {
+            var info = $('#jchatBody');
+            for (var i = 0; i < data.Info.length; i++) {
+                info.append('<div class="col-lg-2 col-md-2 col-sm-2  col-xl-1">' + data.Info[0] + '</div>');
             }
         }
-
-        <textarea id="message" class="form-control col-sm mr-2 " rows="3" type="text" name="Envelope" placeholder="Введите сообщение ..."></textarea>
-        <input id="sendmessage" class="btn btn-outline-success my-2 my-sm-1 col-sm" type="submit" value="Отправить">
-    </form>
+    </script>
+<div id="jchatBody" class="container results pb-4 overflow-auto " style="max-height:55vh; min-height:55vh;">
+    @{
+        Html.RenderPartial("SendMessagePartial", Model);
+    }
 </div>
+<div http-equiv="refresh" content="600" class="container  mt-4 mb-3">
+    @foreach (var item in Model) {
+        if (item.FriendID != User.Identity.GetUserId()) {
+            using (Ajax.BeginForm("SendMessage", new { UserID = User.Identity.GetUserId(), FriendID = Html.DisplayFor(model => item.FriendID) },
+                new AjaxOptions { UpdateTargetId = "jchatBody",OnSuccess="OnSuccess" }, new { @id = "inputForm", @class = "form-inline my-2 my-lg-0 row" })) {
+                <textarea id="message" class="form-control  mr-2 col-12 " rows="3" type="text" name="Envelope" placeholder="Введите сообщение ..."></textarea>
+                <input id="sendmessage" class="btn btn-outline-success my-2 my-sm-1 col-12" type="submit" value="Отправить">
+
+            }
+            break;
+        }
+    }
+</div>
+
+
+
+
+@foreach (var item in Model) {
+    if (item.FriendID != User.Identity.GetUserId()) {
+        @Ajax.BeginForm("JsonRefresh",
+    new { UserID = User.Identity.GetUserId(), FriendID = Html.DisplayFor(model => item.FriendID), Envelope = "" },
+    new AjaxOptions { OnSuccess = "OnSuccess"},
+    new { @id = "ActionLink", @style = "visibility:hidden;" })
+        break;
+    }
 }
+<script type="text/javascript">
+  
+    function Render() {
+        //document.forms[2].submit();
+        setTimeout("Refresh();", 5000);
+        //document.getElementById("ActionLink").submit();
+    }
+    Render();
+
+</script>

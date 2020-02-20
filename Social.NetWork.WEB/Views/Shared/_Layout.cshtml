@@ -25,7 +25,7 @@
                         <li class="pr-2">@Html.ActionLink("Друзья", "FriendsList", "Friend", new { userId = User.Identity.GetUserId() }, null)</li>
                         <li class="pr-2">@Html.ActionLink("Люди", "Index", "People", new { userId = User.Identity.GetUserId() }, null)</li>
                         <li class="pr-2">@Html.ActionLink("Сообщения", "Index", "Message", new { userId = User.Identity.GetUserId() }, null)</li>
-                        <li class="pr-2">@Html.ActionLink("Акаунт", "Contact", "Home")</li>
+                        <li class="pr-2">@Html.ActionLink("Акаунт", "GetAllMyInfo", "Account",new { CurrentUserID = User.Identity.GetUserId()},null)</li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")

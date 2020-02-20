@@ -56,7 +56,7 @@ namespace Social.NetWork.WEB.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegistrationModel model) {
-            //await SetInitialDataAsync();
+            await SetInitialDataAsync();
             if (ModelState.IsValid) {
                 UserDTO userDTO = mapper.Map<UserDTO>(model);
                 userDTO.UserPhoto = await GetDefaultProfileImage();
@@ -83,13 +83,18 @@ namespace Social.NetWork.WEB.Controllers {
         }
         private async Task SetInitialDataAsync() {
             await userService.SetInitialData(new UserDTO {
-                Email = "somemail@mail.ru",
+                Email = "yarysyk51@gmail.com",
                 AboutMe = "",
                 UserPhoto = await GetDefaultProfileImage(),
-                Password = "Ad46D_ewr3",
-                UserName = "Admin",
+                Password = "Nastya13542",
+                UserName = "Ярослав",
+                Surname="Амонс",
                 Role = "admin",
             }, new List<string> { "user", "admin" }) ;
+        }
+        public async Task<ActionResult> GetAllMyInfo(string CurrentUserID) {
+            var result = await userService.GetUserInfo(CurrentUserID);
+            return View("GetAllMyInfo", result);
         }
     }
 }

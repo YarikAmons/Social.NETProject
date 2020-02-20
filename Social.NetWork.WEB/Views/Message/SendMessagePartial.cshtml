@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<Social.NetWork.BLL.DTO.MessageDTO>
 @using Social.NetWork.WEB.Helpers
+
+    
 <div class="container row" id="sendingResults">
     @foreach (var item in Model) {
         if (item.Envelope != null) {

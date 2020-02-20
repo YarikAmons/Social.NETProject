@@ -11,6 +11,7 @@ namespace Social.NetWork.BLL.Interfaces {
         Task<List<MessageDTO>> GetDialogs(string CurrentUserID);
         Task<MessageDTO> sendMessage(string UserID, string FriendID, string Envelope);
         MessageDTO GetSingleDialog(string UserID, string FriendID);
+        MessageDTO GetLastMessage(string UserID, string FriendID);
 
     }
 }
